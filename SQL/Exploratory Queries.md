@@ -59,3 +59,67 @@ FROM orders
 GROUP BY order_hour_of_day
 ORDER BY order_hour_of_day;
 ```
+
+---
+
+## 📊 Business Question A — Which departments generate the most orders?
+
+We create a materialized summary table showing which departments sell the most items and appear in the most orders.
+
+> This is a physical aggregated table — something real analytics teams store for dashboards.
+
+### ✅ SQL — Create aggregated department sales table
+
+```sql
+CREATE TABLE agg_department_sales AS
+SELECT
+    d.department,
+    COUNT(op.product_id) AS total_items_sold,
+    COUNT(DISTINCT o.order_id) AS total_orders
+FROM order_products_prior op
+JOIN products p ON op.product_id = p.product_id
+JOIN departments d ON p.department_id = d.department_id
+JOIN orders o ON op.order_id = o.order_id
+GROUP BY d.department;
+
+CREATE TABLE agg_reorder_rate AS
+SELECT
+    op.product_id,
+    p.product_name,
+    SUM(CASE WHEN reordered = 1 THEN 1 ELSE 0 END)::float / COUNT(*) AS reorder_rate,
+    COUNT(*) AS total_orders
+FROM order_products_prior op
+JOIN products p ON op.product_id = p.product_id
+GROUP BY op.product_id, p.product_name
+HAVING COUNT(*) > 50;  -- avoid noise from uncommon products
+
+CREATE TABLE agg_time_patterns AS
+SELECT
+    order_dow,
+    order_hour_of_day,
+    COUNT(*) AS n_orders
+FROM orders
+GROUP BY order_dow, order_hour_of_day;
+
+CREATE TABLE agg_user_lifetime AS
+SELECT
+    user_id,
+    COUNT(*) AS total_orders,
+    AVG(days_since_prior_order) AS avg_days_between_orders,
+    MIN(order_number) AS first_order_number,
+    MAX(order_number) AS last_order_number
+FROM orders
+GROUP BY user_id;
+
+
+---
+
+If you want, I can also create:
+
+📌 a *table of contents*  
+📌 a *title header* for the whole `.md`  
+📌 *navigation links*  
+📌 or *Power BI instructions* to follow these queries.
+
+Just tell me!
+
