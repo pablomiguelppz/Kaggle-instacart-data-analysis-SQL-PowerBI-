@@ -1,170 +1,104 @@
-# Kaggle-instacart-data-analysis-SQL-PowerBI-
-Sales data extracted from kaggle, 6 csv including orders, products, etc... Analysis was done using SQL and PowerBI
+# Instacart Data Analysis with SQL and Power BI
 
-Retail Analytics with SQL & Power BI — Instacart Case Study
-1. Project Motivation
+This project analyzes Instacart’s online grocery dataset (6 CSV files from Kaggle) using PostgreSQL for data preparation and Power BI for visualization. The goal is to demonstrate a realistic retail analytics workflow using SQL and standard BI practices.
 
-Modern data roles — Data Analyst, Business Intelligence Analyst, Data Engineer — all require fluency in:
+---
 
-SQL (data extraction, cleaning, aggregation)
+## 1. Project Motivation
 
-Power BI or Excel (data visualization & reporting)
+Data roles such as Data Analyst, BI Analyst, and Data Engineer rely heavily on SQL for working with relational data. This project uses the Instacart dataset to practice SQL-based exploration, build aggregated tables for analysis, and create a dashboard that answers common retail business questions.
 
-Realistic business context (not toy datasets)
+---
 
-This project was created to showcase exactly those skills in a clean, end-to-end, employer-ready workflow.
+## 2. Why SQL
 
-2. Why SQL?
+SQL remains the main tool used across analytics teams because it allows analysts to:
 
-SQL is the primary language used across the industry to:
+- Extract and clean data directly from databases  
+- Join multiple tables efficiently  
+- Build aggregated datasets for reporting  
+- Create reproducible transformations
 
-Extract data from relational databases
+The queries used here reflect typical workflows in PostgreSQL, Redshift, BigQuery, and other warehouse environments.
 
-Clean & transform raw tables
+---
 
-Generate aggregated business metrics
+## 3. Why the Instacart Dataset
 
-Build datasets ready for dashboards
+The dataset contains over 3 million orders with detailed information on products, departments, aisles, and user ordering patterns. Because it is multi-table and resembles real retail data, it allows for meaningful business questions such as:
 
-Unlike Python notebooks, SQL reflects how real analysts work inside Redshift, Snowflake, BigQuery, or PostgreSQL.
-SQL is essential — every job listing requires it.
+- Which product categories perform best?  
+- How loyal are customers to specific products?  
+- When do users place orders?  
+- How frequently do customers return?
 
-This project demonstrates:
+---
 
-Joins across 6+ tables
+## 4. Business Questions
 
-Window functions
+The analysis focuses on four practical questions commonly addressed in e-commerce analytics:
 
-Aggregated tables
+### A. Which departments generate the most orders?
+Useful for understanding category performance and prioritizing promotions.
 
-Data modeling
+### B. What products show strong reorder behavior?
+Helps identify loyal-user items and potential inventory priorities.
 
-Real business KPIs
+### C. When do customers place orders (hour/day patterns)?
+Relevant for staffing, delivery operations, and promotion timing.
 
-3. Why the Instacart Dataset?
+### D. What does customer lifetime behavior look like?
+Basic retention metrics such as order frequency and time between purchases.
 
-The Instacart Online Grocery Shopping Dataset is one of the best public retail datasets:
+Each question is answered by generating a materialized (saved) aggregated table in PostgreSQL.
 
-Real-world transactions
+---
 
-3 million+ orders
+## 5. Project Steps
 
-High cardinality (products, aisles, departments)
+### Step 1 — Load Data
+All six CSV files were imported into PostgreSQL using `CREATE TABLE` and `COPY FROM`.
 
-Multi-table relational structure
+### Step 2 — Exploratory SQL
+Initial queries were used to check table size, product counts, user ordering behavior, and ordering times.
 
-Supports realistic business questions
+### Step 3 — Aggregated Tables
+The following tables were created to answer business questions:
 
-This makes it perfect for showcasing:
+- `agg_department_sales`  
+- `agg_reorder_rate`  
+- `agg_time_patterns`  
+- `agg_user_lifetime`
 
-SQL skills on medium-large datasets
+These tables serve as clean inputs for visualization tools.
 
-Metrics that look like actual retail/e-commerce analytics
+### Step 4 — Power BI Dashboard
+A simple dashboard was created to visualize category performance, reorder rates, order timing patterns, and user lifetime metrics.
 
-A workflow that mirrors real BI teams
+---
 
-4. Business Questions
+## 6. Skills Demonstrated
 
-These questions were chosen because they mirror exactly what BI analysts solve in retail & e-commerce:
+**Technical**
+- PostgreSQL  
+- SQL joins, grouping, and window logic  
+- Data modeling and cleaning  
+- Power BI visualization  
+- Git version control  
 
-A. What departments generate the most sales?
+**Business**
+- Category performance analysis  
+- Customer retention and reorder behavior  
+- Demand timing patterns  
+- KPI design and communication  
 
-Which product categories drive the business?
+---
 
-Which departments should be prioritized in promotions?
+If you want, I can also add:
 
-B. What products have the highest reorder rate?
+- a “Project Structure” section  
+- a summary of results  
+- screenshot placeholders  
+- instructions to reproduce the analysis  
 
-Which products have strong customer loyalty?
-
-Which items should have inventory priority?
-
-C. At what times do customers place the most orders?
-
-Staffing decisions
-
-Promotion timing
-
-Delivery logistics
-
-D. What is the lifetime order behavior of customers?
-
-Heavy vs casual users
-
-Retention analysis
-
-Frequency of purchase
-
-These questions lead to the creation of clean aggregated tables that serve as sources for Power BI dashboards.
-
-5. Project Steps
-Step 1 — Load CSVs into PostgreSQL
-
-Created schema instacart
-
-Created all 6 tables (orders, products, departments, etc.)
-
-Used COPY FROM to load data
-
-Step 2 — SQL EDA
-
-Simple queries to understand:
-
-Row counts
-
-Most sold products
-
-Ordering times
-
-User ordering patterns
-
-Step 3 — Business Aggregations
-
-Materialized tables:
-
-agg_department_sales
-
-agg_reorder_rate
-
-agg_time_patterns
-
-agg_user_lifetime
-
-Step 4 — Power BI Dashboard
-
-A dashboard that answers the business questions with visuals:
-
-Top-selling departments
-
-Reorder likelihood by product
-
-Order heatmap (day vs hour)
-
-User retention metrics
-
-6. Skills Demonstrated
-Technical Skills
-
-PostgreSQL
-
-SQL joins & aggregations
-
-Schema design
-
-Data cleaning
-
-Power BI visualization
-
-Git version control
-
-Business Skills
-
-KPI design
-
-Retail category analysis
-
-Customer retention analysis
-
-Demand seasonality & time patterns
-
-Communicating insights clearly
+Just tell me what you want next.
