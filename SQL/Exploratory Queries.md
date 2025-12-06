@@ -114,12 +114,3 @@ GROUP BY user_id;
 
 ---
 
-If you want, I can also create:
-
-📌 a *table of contents*  
-📌 a *title header* for the whole `.md`  
-📌 *navigation links*  
-📌 or *Power BI instructions* to follow these queries.
-
-Just tell me!
-
