@@ -96,7 +96,7 @@ JOIN products p ON op.product_id = p.product_id
 GROUP BY op.product_id, p.product_name
 HAVING COUNT(*) > 50;  -- avoid noise from uncommon products
 ```
-Customer Lifetime Metrics
+Time of Day / Day of Week Patterns
 
 ```sql
 CREATE TABLE agg_time_patterns AS
@@ -107,6 +107,8 @@ SELECT
 FROM orders
 GROUP BY order_dow, order_hour_of_day;
 ```
+Customer Lifetime Metrics
+
 ```sql
 CREATE TABLE agg_user_lifetime AS
 SELECT
