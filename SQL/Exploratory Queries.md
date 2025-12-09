@@ -62,13 +62,9 @@ ORDER BY order_hour_of_day;
 
 ---
 
-## 📊 Business Question A — Which departments generate the most orders?
+## 📊 Business Questions — Which departments generate the most orders?
 
-We create a materialized summary table showing which departments sell the most items and appear in the most orders.
-
-> This is a physical aggregated table — something real analytics teams store for dashboards.
-
-### ✅ SQL — Create aggregated department sales table
+I create an aggregated table showing which departments sell the most items and appear in the most orders.
 
 ```sql
 CREATE TABLE agg_department_sales AS
@@ -96,7 +92,7 @@ JOIN products p ON op.product_id = p.product_id
 GROUP BY op.product_id, p.product_name
 HAVING COUNT(*) > 50;  -- avoid noise from uncommon products
 ```
-Time of Day / Day of Week Patterns
+Time of Day / Day of Week Patterns, When do customers place orders?
 
 ```sql
 CREATE TABLE agg_time_patterns AS
